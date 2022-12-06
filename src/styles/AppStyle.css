@@ -1,0 +1,29 @@
+:root {
+  /* --highlight-color: #F2E7D5;
+  --main-color: #f7f7f7;
+  --darker-color: #6D9886;
+  --darkest-color: #393E46; */
+  --highlight-color: #f7f7f7;
+  --main-color: #f7f7f7;
+  --darker-color: rgb(83, 152, 255);
+  --darkest-color: rgb(0, 0, 49);
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+}
+
+button {
+  background-color: var(--darker-color);
+  color: var(--main-color);
+  border: 1px solid var(--darkest-color);
+  padding: .3rem;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: var(--darkest-color);
+  color: var(--main-color);
+  border-color: var(--darker-color);
+}

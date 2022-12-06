@@ -1,0 +1,41 @@
+.main {
+  width: 100%;
+  background-color: var(--main-color);
+  color: var(--darkest-color);
+  font-family: 'Roboto';
+  padding: 10px 25px;
+  flex-shrink: 2;
+}
+
+.main-controls {
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 10px;
+}
+
+.noteDisplay {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  width: 0;
+  min-width: 100%;
+}
+
+.noteDisplay input {
+  color: var(--darkest-color);
+  font-size: 32px;
+}
+
+.noteDisplay textarea {
+  height: 70vh;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--darkest-color);
+}
+
+@media (max-width: 560px) {
+  .main {
+    padding: 0 5px;
+  }
+}
