@@ -11,6 +11,7 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   }
 
   function handleClick(event, note) {
+    event.preventDefault()
     if(event.target.className === 'deleteBtn') return
     else if(event.target.className === 'toggleIsCollapsed') setIsCollapsed(!isCollapsed)
     else {
@@ -27,16 +28,13 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   return(
     <div className={isCollapsed ? "sideBar collapsed" : "sideBar"}>
 
-      <button className="toggleIsCollapsed" onClick={(event) => handleClick(event)}>{isCollapsed ? ">>" : "<<"}</button>
+      <button className="toggleIsCollapsed" onClick={(event) => handleClick(event)}>{isCollapsed ? ">" : "<"}</button>
 
       <div style={isCollapsed ? {display: 'none'} : {display: 'block'}}>
         <div className="sidebar-controls">
           <button onClick={() => createNote()}>New</button>   
           <div>
-            <div>
-              <label htmlFor="searchInput">Search: </label>
-              <input type="text" onChange={(event) => handleChange(event)} value={filter} id="searchInput"></input>
-            </div>
+              <input type="text" placeholder="Search" onChange={(event) => handleChange(event)} value={filter} id="searchInput"></input>
           </div>
         </div>
 
@@ -46,7 +44,7 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
               return (
                 <li className={isNoteActive(note.id) ? "activeNote" : ""} key={index} onClick={(event) => handleClick(event, note)}>
                   <div>
-                    <p>{note.title.length > 27 ? note.title.slice(0, 27) + "..." : note.title}</p>
+                    <h3>{note.title.length > 27 ? note.title.slice(0, 27) + "..." : note.title}</h3>
                     <p>{note.dateCreated}</p>
                   </div>
                   <button className="deleteBtn" onClick={() => deleteNote(note.id)}>X</button>
@@ -57,7 +55,7 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
               return (
                 <li className={isNoteActive(note.id) ? "activeNote" : ""} key={index} onClick={(event) => handleClick(event, note)}>
                   <div>
-                    <p>{note.title.length > 27 ? note.title.slice(0, 27) + "..." : note.title}</p>
+                    <h3>{note.title.length > 27 ? note.title.slice(0, 27) + "..." : note.title}</h3>
                     <p>{note.dateCreated}</p>
                   </div>
                   <button className="deleteBtn" onClick={() => deleteNote(note.id)}>X</button>

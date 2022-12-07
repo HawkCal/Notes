@@ -1,9 +1,8 @@
 .sideBar {
-  background-color: var(--highlight-color);
-  font-family: 'Roboto';
-  color: var(--darkest-color);
+  background-color: var(--main-color);
   width: 290px;
-  border-right: 1px solid var(--darkest-color);
+  padding-right: .5rem;
+  border-right: 1px solid var(--dark-color);
   flex-shrink: 1;
 }
 
@@ -15,13 +14,14 @@
 }
 
 .collapsed {
-  width: 35px
+  width: 35px;
+  padding-right: .1rem;
 }
 
 .sidebar-controls {
-  padding: 10px 5px;
-  border-bottom: 1px solid var(--darker-color);
+  border-bottom: 1px solid var(--dark-color);
   text-align: center;
+  padding-bottom: .5rem;
 }
 
 .sidebar-controls>div {
@@ -31,14 +31,19 @@
   margin-top: .5rem;
 }
 
+.sideBar input {
+  font-size: inherit;
+  width: 90%;
+}
+
 ul {
   display: flex;
   flex-direction: column;
 }
 
 li {
-  border-bottom: 1px solid var(--darker-color);
-  padding: 10px 5px;
+  border-bottom: 1px solid var(--dark-color);
+  padding: 5px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,5 +56,6 @@ div>p:first-child {
 }
 
 .activeNote {
-  background-color: #c5c5c5;
+  background-color: whitesmoke;
+  color: var(--blue-color);
 }

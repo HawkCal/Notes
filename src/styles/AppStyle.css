@@ -1,29 +1,45 @@
 :root {
-  /* --highlight-color: #F2E7D5;
-  --main-color: #f7f7f7;
-  --darker-color: #6D9886;
-  --darkest-color: #393E46; */
-  --highlight-color: #f7f7f7;
-  --main-color: #f7f7f7;
-  --darker-color: rgb(83, 152, 255);
-  --darkest-color: rgb(0, 0, 49);
+  --main-color: #fff;
+  --blue-color: #366ED8;
+  --green-color: #6FB98F;
+  --red-color: #DF634E;
+  --dark-color: rgb(153, 153, 153);
 }
 
 .app {
   height: 100vh;
   display: flex;
+  padding: .5rem;
 }
 
 button {
-  background-color: var(--darker-color);
+  background-color: var(--blue-color);
   color: var(--main-color);
-  border: 1px solid var(--darkest-color);
-  padding: .3rem;
+  border: 1px solid var(--blue-color);
+  padding: .3rem .5rem;
   font-size: 1rem;
+  border-radius: 25px;
 }
 
-button:hover {
-  background-color: var(--darkest-color);
-  color: var(--main-color);
-  border-color: var(--darker-color);
+@media (hover: hover) {
+  button:hover {
+    background-color: var(--main-color);
+    color: var(--blue-color);
+  }
+}
+
+.deleteBtn {
+  background-color: var(--red-color);
+  border-color: var(--red-color);
+}
+.deleteBtn:hover {
+  color: var(--red-color);
+}
+
+.editBtn {
+  background-color: var(--green-color);
+  border-color: var(--green-color);
+}
+.editBtn:hover {
+  color: var(--green-color);
 }
