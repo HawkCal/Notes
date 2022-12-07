@@ -21,13 +21,6 @@ button {
   border-radius: 25px;
 }
 
-@media (hover: hover) {
-  button:hover {
-    background-color: var(--main-color);
-    color: var(--blue-color);
-  }
-}
-
 .deleteBtn {
   background-color: var(--red-color);
   border-color: var(--red-color);
@@ -42,4 +35,11 @@ button {
 }
 .editBtn:hover {
   color: var(--green-color);
+}
+
+@media (hover: hover) {
+  button:hover {
+    background-color: var(--main-color);
+    color: var(--blue-color);
+  }
 }
