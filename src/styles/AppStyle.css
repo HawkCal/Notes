@@ -25,21 +25,21 @@ button {
   background-color: var(--red-color);
   border-color: var(--red-color);
 }
-.deleteBtn:hover {
-  color: var(--red-color);
-}
 
 .editBtn {
   background-color: var(--green-color);
   border-color: var(--green-color);
-}
-.editBtn:hover {
-  color: var(--green-color);
 }
 
 @media (hover: hover) {
   button:hover {
     background-color: var(--main-color);
     color: var(--blue-color);
+  }
+  .editBtn:hover {
+    color: var(--green-color);
+  }
+  .deleteBtn:hover {
+    color: var(--red-color);
   }
 }
