@@ -32,7 +32,6 @@ function App() {
         setActiveNote({title: '', text: '', tags: [], id: result, dateCreated: date})
         if(window.innerWidth <= 560) {
           setIsCollapsed(true)
-          console.log('yes')
         }
       })
     }

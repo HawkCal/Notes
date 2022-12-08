@@ -30,6 +30,11 @@ button {
   background-color: var(--green-color);
   border-color: var(--green-color);
 }
+@media (max-width: 560px) {
+  .app {
+    overflow-x: hidden;
+  }
+}
 
 @media (hover: hover) {
   button:hover {
