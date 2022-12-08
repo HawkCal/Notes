@@ -12,32 +12,23 @@ function App() {
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   useEffect(() => {
-    if(activeNote.id !== 'temp') {
-      const note = notes.find(note => note.id === activeNote.id)
-      if(note === undefined) setActiveNote({title: 'Select a note', text: '', id: 'temp'})
-      else setActiveNote(note)
-    }
+    if(activeNote.id === 'temp') return
+
+    const note = notes.find(note => note.id === activeNote.id)
+    if(note === undefined) setActiveNote({title: 'Select a note', text: '', id: 'temp'})
+    else setActiveNote(note)
+    
   }, [notes])
 
   function createNote() {
-    try {
-      let date = new Date().toLocaleDateString('en-GB')
-      db.notes.add({
-        title: '',
-        text: '',
-        tags: [],
-        dateCreated: date
+    const newNote = {title: '', text: '', tags: [], dateCreated: new Date().toLocaleDateString('en-GB') }
+
+    db.notes
+      .add(newNote)
+      .then((result) => {
+        setActiveNote({...newNote, id: result})
+        if(window.innerWidth <= 560) setIsCollapsed(true)
       })
-      .then(result => {
-        setActiveNote({title: '', text: '', tags: [], id: result, dateCreated: date})
-        if(window.innerWidth <= 560) {
-          setIsCollapsed(true)
-        }
-      })
-    }
-    catch(error) {
-      console.error(`Error: ${error}`)
-    }
   }
 
   function updateFilter(value) {
