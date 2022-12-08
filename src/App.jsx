@@ -46,6 +46,7 @@ function App() {
 
   function selectNote(selectedNote) {
     setActiveNote(selectedNote)
+    if(window.innerWidth <= 560) updateIsCollapsed(true)
   }
 
   function updateIsCollapsed(value) {

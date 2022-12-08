@@ -35,13 +35,13 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
     }
     else {
       selectNote(note)
-      if(window.innerWidth <= 560) updateIsCollapsed(true)
     }
   }
 
   function isNoteActive(noteId) {
     if(noteId) return noteId === activeNoteId
-    else return false
+    
+    return false
   }
 
   return(
