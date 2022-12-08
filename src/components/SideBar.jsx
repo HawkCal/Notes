@@ -7,7 +7,7 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
 
   //Sort the list of notes, when notes updates, and when sortByValue updates
   useEffect(() => {
-    let notesCopy = [{title: "TESTDELETEME", text: 'TESTNOTEDELETEBEFOREDEPLOY', id: 3000, dateCreated: '06/12/2022'}, ...notes.map(note => note)]
+    let notesCopy = notes.map(note => note)
     if(sortByValue === 'dateAscending') setSortedNotes(notesCopy)
     else if(sortByValue === 'dateDescending') setSortedNotes(notesCopy.sort((a, b) => a.dateCreated < b.dateCreated ? 1 : -1))
     else if(sortByValue === 'a-z') setSortedNotes(notesCopy.sort((a, b) => a.title.replace(/\s/g, "").toLowerCase() > b.title.replace(/\s/g, "").toLowerCase() ? 1 : -1))
