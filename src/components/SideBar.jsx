@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import '../styles/SideBarStyle.css'
+import SideBarControls from './SideBarControls'
 
 function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isCollapsed, updateIsCollapsed}) {
   const [sortedNotes, setSortedNotes] = useState([])
@@ -18,8 +19,8 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   }
 
   function handleChange(event) {
-    if(event.target.id === 'searchInput') updateFilter(target.value)
-    else if(event.target.id === 'sortBySelect') setSortByValue(target.value)
+    if(event.target.id === 'searchInput') updateFilter(event.target.value)
+    else if(event.target.id === 'sortBySelect') setSortByValue(event.target.value)
   }
 
   function handleClick(event, note) {
@@ -39,21 +40,8 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
       <button className="toggleIsCollapsed" onClick={(event) => handleClick(event)}>{isCollapsed ? ">" : "<"}</button>
 
       <div style={isCollapsed ? {display: 'none'} : {display: 'block'}}>
-        <div className="sidebar-controls">
-          <div>
-            <select id="sortBySelect" onChange={event => handleChange(event)}>
-              <option value="dateAscending">Date Ascending</option>
-              <option value="dateDescending">Date Descending</option>
-              <option value="a-z">A-Z</option>
-              <option value="z-a">Z-A</option>
-            </select>
-            <button onClick={() => createNote()}>New</button>    
-          </div> 
-
-          <div>
-              <input type="text" placeholder="Search" onChange={event => handleChange(event)} value={filter} id="searchInput"></input>
-          </div>
-        </div>
+        
+        <SideBarControls handleChange={handleChange} createNote={createNote} filter={filter}/>
 
         <ul>
           {
