@@ -54,7 +54,7 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <div className='app'>
 
       <SideBar 
         notes={notes}
@@ -67,7 +67,12 @@ function App() {
         isCollapsed={isCollapsed}
         updateIsCollapsed={updateIsCollapsed}
       />
-      <Main note={activeNote} updateNote={updateNote} deleteNote={deleteNote} />
+
+      <Main 
+        note={activeNote} 
+        updateNote={updateNote} 
+        deleteNote={deleteNote} 
+      />
 
     </div>
   )

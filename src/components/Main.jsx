@@ -20,11 +20,10 @@ function Main({note, updateNote, deleteNote}) {
 
   function handleClick(event) {
     if(event.target.className === 'editBtn') {
-      if(isEditing) {
-        setTitleInputValue(note.title)
-        setTextInputValue(note.text)
-      }
-
+      if(!isEditing) return
+      
+      setTitleInputValue(note.title)
+      setTextInputValue(note.text)
       setIsEditing(!isEditing)
     }
     else if(event.target.className === 'saveBtn') {
@@ -39,19 +38,18 @@ function Main({note, updateNote, deleteNote}) {
 
   return (
     <div className="main">
-      
     {
-    note.id === 'temp' ? <h1>Select a note</h1> : <>
-      <div onClick={event => handleClick(event)} className="main-controls">
-        <button className='editBtn'>{isEditing ? "Cancel" : "Edit"}</button>
-        <button className='saveBtn'>Save</button>
-        <button className='deleteBtn'>Delete</button>
-      </div>
+    note.id === 'temp' ? <h1>Select a note</h1> : 
+      <>
+        <div onClick={event => handleClick(event)} className="main-controls">
+          <button className='editBtn'>{isEditing ? "Cancel" : "Edit"}</button>
+          <button className='saveBtn'>Save</button>
+          <button className='deleteBtn'>Delete</button>
+        </div>
 
-      <NoteDisplay note={note} isEditing={isEditing} handleChange={handleChange} titleInputValue={titleInputValue} textInputValue={textInputValue} />
-    </>
+        <NoteDisplay note={note} isEditing={isEditing} handleChange={handleChange} titleInputValue={titleInputValue} textInputValue={textInputValue} />
+      </>
     }
-
     </div>
   )
 }

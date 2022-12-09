@@ -5,43 +5,32 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   const [sortedNotes, setSortedNotes] = useState([])
   const[sortByValue, setSortByValue] = useState('dateAscending')
 
-  //Sort the list of notes, when notes updates, and when sortByValue updates
   useEffect(() => {
-    let notesCopy = notes.map(note => note)
+    sortNotes()
+  }, [notes, sortByValue]) 
+
+  function sortNotes() {
+    let notesCopy = Array.from(notes)
     if(sortByValue === 'dateAscending') setSortedNotes(notesCopy)
     else if(sortByValue === 'dateDescending') setSortedNotes(notesCopy.sort((a, b) => a.dateCreated < b.dateCreated ? 1 : -1))
     else if(sortByValue === 'a-z') setSortedNotes(notesCopy.sort((a, b) => a.title.replace(/\s/g, "").toLowerCase() > b.title.replace(/\s/g, "").toLowerCase() ? 1 : -1))
     else if(sortByValue === 'z-a') setSortedNotes(notesCopy.sort((a, b) => a.title.replace(/\s/g, "").toLowerCase() < b.title.replace(/\s/g, "").toLowerCase() ? 1 : -1))
-  }, [notes, sortByValue]) 
+  }
 
   function handleChange(event) {
-    let target = event.target
-    if(target.id === 'searchInput') {
-      updateFilter(target.value)
-    }
-    else if(target.id === 'sortBySelect') {
-      setSortByValue(target.value)
-    }
+    if(event.target.id === 'searchInput') updateFilter(target.value)
+    else if(event.target.id === 'sortBySelect') setSortByValue(target.value)
   }
 
   function handleClick(event, note) {
-    event.preventDefault()
-    let target = event.target
-    if(target.className === 'deleteBtn') {
-      deleteNote(note.id)
-    }
-    else if(target.className === 'toggleIsCollapsed') {
-      updateIsCollapsed(!isCollapsed)
-    }
-    else {
-      selectNote(note)
-    }
+    if(event.target.className === 'deleteBtn') deleteNote(note.id)
+    else if(event.target.className === 'toggleIsCollapsed') updateIsCollapsed(!isCollapsed)
+    else selectNote(note)
   }
 
   function isNoteActive(noteId) {
     if(noteId) return noteId === activeNoteId
-    
-    return false
+    else return false
   }
 
   return(
@@ -67,7 +56,8 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
         </div>
 
         <ul>
-          {sortedNotes.map((note, index) => {
+          {
+          sortedNotes.map((note, index) => {
             if(filter.length === 0) {
               return (
                 <li className={isNoteActive(note.id) ? "activeNote" : ""} key={index} onClick={(event) => handleClick(event, note)}>
@@ -90,7 +80,8 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
                 </li>
               )
             }
-          })}
+          })
+          }
           </ul>
         </div>
 
