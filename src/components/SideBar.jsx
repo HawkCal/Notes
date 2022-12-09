@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import '../styles/SideBarStyle.css'
 import SideBarControls from './SideBarControls'
+import SideBarListItem from './SideBarListItem'
 
 function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isCollapsed, updateIsCollapsed}) {
   const [sortedNotes, setSortedNotes] = useState([])
@@ -44,36 +45,16 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
         <SideBarControls handleChange={handleChange} createNote={createNote} filter={filter}/>
 
         <ul>
-          {
-          sortedNotes.map((note, index) => {
-            if(filter.length === 0) {
-              return (
-                <li className={isNoteActive(note.id) ? "activeNote" : ""} key={index} onClick={(event) => handleClick(event, note)}>
-                  <div>
-                    <h3>{note.title.length > 27 ? note.title.slice(0, 27) + "..." : note.title}</h3>
-                    <p>{note.dateCreated}</p>
-                  </div>
-                  <button className="deleteBtn" onClick={(event) => handleClick(event, note)}>X</button>
-                </li>
-              )
+          {sortedNotes.map((note, index) => {
+            if(note.title.toLowerCase().includes(filter.toLowerCase())) {
+              return <SideBarListItem key={index} isNoteActive={isNoteActive} handleClick={handleClick} note={note} />
             }
-            else if(note.title.toLowerCase().includes(filter.toLowerCase())) {
-              return (
-                <li className={isNoteActive(note.id) ? "activeNote" : ""} key={index} onClick={(event) => handleClick(event, note)}>
-                  <div>
-                    <h3>{note.title.length > 27 ? note.title.slice(0, 27) + "..." : note.title}</h3>
-                    <p>{note.dateCreated}</p>
-                  </div>
-                  <button className="deleteBtn" onClick={(event) => handleClick(event, note)}>X</button>
-                </li>
-              )
-            }
-          })
-          }
-          </ul>
-        </div>
+          })}
+        </ul>
 
       </div>
+
+    </div>
   )
 
 }
