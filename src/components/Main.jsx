@@ -20,11 +20,11 @@ function Main({note, updateNote, deleteNote}) {
 
   function handleClick(event) {
     if(event.target.className === 'editBtn') {
+      setIsEditing(!isEditing)
       if(!isEditing) return
-      
       setTitleInputValue(note.title)
       setTextInputValue(note.text)
-      setIsEditing(!isEditing)
+
     }
     else if(event.target.className === 'saveBtn') {
       setIsEditing(false)
