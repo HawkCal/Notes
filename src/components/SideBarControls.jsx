@@ -1,3 +1,5 @@
+import addIcon from '../assets/note_add_FILL0_wght400_GRAD0_opsz48.png'
+
 function SideBarControls({handleChange, createNote, filter}) {
   return (
     <div className="sidebar-controls">
@@ -8,7 +10,9 @@ function SideBarControls({handleChange, createNote, filter}) {
           <option value="a-z">A-Z</option>
           <option value="z-a">Z-A</option>
         </select>
-        <button onClick={() => createNote()}>New</button>
+        <button className="addNoteBtn" onClick={() => createNote()}>
+          <img src={addIcon} alt='create' />
+        </button>
       </div> 
 
       <div>

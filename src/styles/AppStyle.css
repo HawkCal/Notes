@@ -13,23 +13,17 @@
 }
 
 button {
-  background-color: var(--blue-color);
-  color: var(--main-color);
-  border: 1px solid var(--blue-color);
-  padding: .3rem .5rem;
-  font-size: 1rem;
-  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  width: 32px;
+  height: 32px;
 }
 
-.deleteBtn {
-  background-color: var(--red-color);
-  border-color: var(--red-color);
+button > img {
+  width: 25px;
+  vertical-align: middle;
 }
 
-.editBtn {
-  background-color: var(--green-color);
-  border-color: var(--green-color);
-}
 @media (max-width: 560px) {
   .app {
     overflow-x: hidden;
@@ -38,13 +32,13 @@ button {
 
 @media (hover: hover) {
   button:hover {
-    background-color: var(--main-color);
-    color: var(--blue-color);
-  }
-  .editBtn:hover {
-    color: var(--green-color);
+    cursor: pointer;
+    border-bottom: 3px solid var(--blue-color);
   }
   .deleteBtn:hover {
-    color: var(--red-color);
+    border-bottom: 3px solid var(--red-color);
+  }
+  .editBtn:hover {
+    border-bottom: 3px solid var(--green-color);
   }
 }

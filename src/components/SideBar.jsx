@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import '../styles/SideBarStyle.css'
 import SideBarControls from './SideBarControls'
 import SideBarListItem from './SideBarListItem'
+import collapseIcon from '../assets/keyboard_double_arrow_left_FILL0_wght400_GRAD0_opsz48.png'
+import expandIcon from '../assets/keyboard_double_arrow_right_FILL0_wght400_GRAD0_opsz48.png'
 
 function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isCollapsed, updateIsCollapsed}) {
   const [sortedNotes, setSortedNotes] = useState([])
@@ -25,8 +27,8 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   }
 
   function handleClick(event, note) {
-    if(event.target.className === 'deleteBtn') deleteNote(note.id)
-    else if(event.target.className === 'toggleIsCollapsed') updateIsCollapsed(!isCollapsed)
+    if(event.target.parentElement.className === 'deleteBtn') deleteNote(note.id)
+    else if(event.currentTarget.className === 'toggleIsCollapsed') updateIsCollapsed(!isCollapsed)
     else selectNote(note)
   }
 
@@ -38,7 +40,9 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   return(
     <div className={isCollapsed ? "sideBar collapsed" : "sideBar"}>
 
-      <button className="toggleIsCollapsed" onClick={(event) => handleClick(event)}>{isCollapsed ? ">" : "<"}</button>
+      <button className="toggleIsCollapsed" onClick={(event) => handleClick(event)}>
+        <img src={isCollapsed ? expandIcon : collapseIcon} alt='collapse/expand' />
+      </button>
 
       <div style={isCollapsed ? {display: 'none'} : {display: 'block'}}>
         

@@ -12,11 +12,15 @@
   padding-bottom: .5rem;
 }
 
-.sidebar-controls>div {
+.sidebar-controls > div {
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-top: .5rem;
+}
+
+#sortBySelect {
+  padding: .1rem;
 }
 
 .sideBar input {
