@@ -1,5 +1,4 @@
 .sideBar {
-  background-color: var(--main-color);
   width: 290px;
   padding-right: .5rem;
   border-right: 1px solid var(--dark-color);
@@ -56,6 +55,11 @@ div>p:first-child {
   .sideBar {
     width: 100%;
     flex-shrink: 0;
+  }
+}
+@media (hover: hover) {
+  li:hover {
+    background-color: whitesmoke;
   }
 }
 .collapsed {
