@@ -9,7 +9,7 @@ function App() {
   let notes = useLiveQuery(() => db.notes.toArray()) || [{title: 'Loading...', text: '', id: 'temp'}]
   const [activeNote, setActiveNote] = useState({title: 'Select a note', text: '', id: 'temp'})
   const [filter, setFilter] = useState('')
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isSideBarCollapsed, setIsSideBarCollapsed] = useState(false)
 
   useEffect(() => {
     if(activeNote.id === 'temp') return
@@ -27,7 +27,7 @@ function App() {
       .add(newNote)
       .then((result) => {
         setActiveNote({...newNote, id: result})
-        if(window.innerWidth <= 560) setIsCollapsed(true)
+        if(window.innerWidth <= 560) setIsSideBarCollapsed(true)
       })
   }
 
@@ -41,12 +41,12 @@ function App() {
 
   function deleteNote(noteId) {
     db.notes.delete(noteId)
-    setIsCollapsed(false)
+    setIsSideBarCollapsed(false)
   }
 
   function selectNote(selectedNote) {
     setActiveNote(selectedNote)
-    if(window.innerWidth <= 560) setIsCollapsed(true)
+    if(window.innerWidth <= 560) setIsSideBarCollapsed(true)
   }
 
   return (
@@ -60,8 +60,8 @@ function App() {
         selectNote={selectNote} 
         filter={filter} 
         updateFilter={updateFilter} 
-        isCollapsed={isCollapsed}
-        setIsCollapsed={setIsCollapsed}
+        isSideBarCollapsed={isSideBarCollapsed}
+        setIsSideBarCollapsed={setIsSideBarCollapsed}
       />
 
       <Main 

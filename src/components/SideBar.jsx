@@ -1,11 +1,12 @@
 import {useState, useEffect} from 'react'
 import '../styles/SideBarStyle.css'
 import SideBarControls from './SideBarControls'
+import SideBarList from './SideBarList'
 import SideBarListItem from './SideBarListItem'
 import collapseIcon from '../assets/keyboard_double_arrow_left_FILL0_wght400_GRAD0_opsz48.png'
 import expandIcon from '../assets/keyboard_double_arrow_right_FILL0_wght400_GRAD0_opsz48.png'
 
-function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isCollapsed, setIsCollapsed}) {
+function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isSideBarCollapsed, setIsSideBarCollapsed}) {
   const [sortedNotes, setSortedNotes] = useState([])
   const[sortByValue, setSortByValue] = useState('dateAscending')
 
@@ -28,7 +29,7 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
 
   function handleClick(event, note) {
     if(event.target.parentElement.className === 'deleteBtn') deleteNote(note.id)
-    else if(event.currentTarget.className === 'toggleIsCollapsed') setIsCollapsed(!isCollapsed)
+    else if(event.currentTarget.className === 'toggleIsSideBarCollapsed') setIsSideBarCollapsed(!isSideBarCollapsed)
     else selectNote(note)
   }
 
@@ -38,25 +39,16 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
   }
 
   return(
-    <div className={isCollapsed ? "sideBar collapsed" : "sideBar"}>
+    <div className={isSideBarCollapsed ? "sideBar collapsed" : "sideBar"}>
 
-      <button className="toggleIsCollapsed" onClick={(event) => handleClick(event)}>
-        <img src={isCollapsed ? expandIcon : collapseIcon} alt='collapse/expand' />
+      <button className="toggleIsSideBarCollapsed" onClick={(event) => handleClick(event)}>
+        <img src={isSideBarCollapsed ? expandIcon : collapseIcon} alt='collapse/expand' />
       </button>
 
-      <div style={isCollapsed ? {display: 'none'} : {display: 'block'}}>
-        
+      {!isSideBarCollapsed && <>
         <SideBarControls handleChange={handleChange} createNote={createNote} filter={filter}/>
-
-        <ul>
-          {sortedNotes.map((note, index) => {
-            if(note.title.toLowerCase().includes(filter.toLowerCase())) {
-              return <SideBarListItem key={index} isNoteActive={isNoteActive} handleClick={handleClick} note={note} />
-            }
-          })}
-        </ul>
-
-      </div>
+        <SideBarList notes={sortedNotes} filter={filter} isNoteActive={isNoteActive} handleClick={handleClick}/>
+      </>}
 
     </div>
   )
