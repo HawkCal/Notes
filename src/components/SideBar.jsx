@@ -5,7 +5,7 @@ import SideBarListItem from './SideBarListItem'
 import collapseIcon from '../assets/keyboard_double_arrow_left_FILL0_wght400_GRAD0_opsz48.png'
 import expandIcon from '../assets/keyboard_double_arrow_right_FILL0_wght400_GRAD0_opsz48.png'
 
-function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isCollapsed, updateIsCollapsed}) {
+function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filter, updateFilter, isCollapsed, setIsCollapsed}) {
   const [sortedNotes, setSortedNotes] = useState([])
   const[sortByValue, setSortByValue] = useState('dateAscending')
 
@@ -28,7 +28,7 @@ function SideBar({notes, activeNoteId, createNote, deleteNote, selectNote, filte
 
   function handleClick(event, note) {
     if(event.target.parentElement.className === 'deleteBtn') deleteNote(note.id)
-    else if(event.currentTarget.className === 'toggleIsCollapsed') updateIsCollapsed(!isCollapsed)
+    else if(event.currentTarget.className === 'toggleIsCollapsed') setIsCollapsed(!isCollapsed)
     else selectNote(note)
   }
 
