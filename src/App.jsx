@@ -6,6 +6,7 @@ import SideBar from './components/SideBar'
 import Main from './components/Main'
 
 function App() {
+  const [sortByValue, setSortByValue] = useState('dateAscending')
   let notes = useLiveQuery(() => db.notes.toArray()) || [{title: 'Loading...', text: '', id: 'temp'}]
   const [activeNote, setActiveNote] = useState({title: 'Select a note', text: '', id: 'temp'})
   const [filter, setFilter] = useState('')
@@ -19,6 +20,14 @@ function App() {
     else setActiveNote(note)
     
   }, [notes])
+
+  function sortNotes() {
+    let notesCopy = Array.from(notes)
+    if(sortByValue === 'dateAscending') return notesCopy
+    else if(sortByValue === 'dateDescending') return notesCopy.sort((a, b) => a.dateCreated < b.dateCreated ? 1 : -1)
+    else if(sortByValue === 'a-z') return notesCopy.sort((a, b) => a.title.replace(/\s/g, "").toLowerCase() > b.title.replace(/\s/g, "").toLowerCase() ? 1 : -1)
+    else if(sortByValue === 'z-a') return notesCopy.sort((a, b) => a.title.replace(/\s/g, "").toLowerCase() < b.title.replace(/\s/g, "").toLowerCase() ? 1 : -1)
+  }
 
   function createNote() {
     const newNote = {title: '', text: '', tags: [], dateCreated: new Date().toLocaleDateString('en-GB') }
@@ -53,7 +62,7 @@ function App() {
     <div className='app'>
 
       <SideBar 
-        notes={notes}
+        notes={sortNotes()}
         activeNoteId={activeNote.id} 
         createNote={createNote} 
         deleteNote={deleteNote} 
@@ -62,6 +71,7 @@ function App() {
         updateFilter={updateFilter} 
         isSideBarCollapsed={isSideBarCollapsed}
         setIsSideBarCollapsed={setIsSideBarCollapsed}
+        setSortByValue={setSortByValue}
       />
 
       <Main 
